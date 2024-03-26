@@ -450,7 +450,8 @@ function nodeActive(a) {
         
         n={
             name: b.label,
-            colour: b.color
+            colour: b.color,
+            weight: b.size,
         };
         
    	   if (a==b.source) outgoing[b.target]=n;		//SAH
@@ -478,6 +479,12 @@ function nodeActive(a) {
     }
     
     var createList=function(c) {
+        weight2cn = {
+            "-1": "未知",
+            "1": "轻微",
+            "2": "中度",
+            "3": "严重"
+        }
         var f = [];
     	var e = [],
       	 	 //c = sigInst.neighbors,
@@ -489,7 +496,7 @@ function nodeActive(a) {
         d.attr.color = c[g].colour;
         a != g && e.push({
             id: g,
-            name: d.label,
+            name: d.label + ' ' + weight2cn[c[g].weight],
             group: (c[g].name)? c[g].name:"",
             colour: c[g].colour
         })
@@ -528,13 +535,13 @@ function nodeActive(a) {
 
 	if (groupByDirection) {
 		size=Object.size(mutual);
-		f.push("<h2>Mututal (" + size + ")</h2>");
+		f.push("<h2>相互影响 (" + size + ")</h2>");
 		(size>0)? f=f.concat(createList(mutual)) : f.push("No mutual links<br>");
 		size=Object.size(incoming);
-		f.push("<h2>Incoming (" + size + ")</h2>");
+		f.push("<h2>受影响药物 (" + size + ")</h2>");
 		(size>0)? f=f.concat(createList(incoming)) : f.push("No incoming links<br>");
 		size=Object.size(outgoing);
-		f.push("<h2>Outgoing (" + size + ")</h2>");
+		f.push("<h2>影响的药物 (" + size + ")</h2>");
 		(size>0)? f=f.concat(createList(outgoing)) : f.push("No outgoing links<br>");
 	} else {
 		f=f.concat(createList(sigInst.neighbors));
