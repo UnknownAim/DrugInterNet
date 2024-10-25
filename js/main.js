@@ -51,9 +51,9 @@ function initSigma(config) {
 		drawProps=config.sigma.drawingProperties;
 	else
 		drawProps={
-        defaultLabelColor: "#000",
+        defaultLabelColor: "#fff",
         defaultLabelSize: 14,
-        defaultLabelBGColor: "#ddd",
+        defaultLabelBGColor: "#000",
         defaultHoverLabelBGColor: "#002147",
         defaultLabelHoverColor: "#fff",
         labelThreshold: 10,
